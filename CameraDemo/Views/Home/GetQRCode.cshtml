@@ -1,0 +1,11 @@
+﻿@model  CameraDemo.Models.QRCodeViewModel
+@{
+    ViewBag.Title = "GetQRCode";
+}
+
+<h2>Here is your QR Code Information....</h2>
+<hr />
+
+<h4><b>@Model.QRCodeInfo</b></h4>
+
+<hr />@Html.ActionLink("Back to QRCode Scanner", "Index", "Home",new { @class= "bottom" })

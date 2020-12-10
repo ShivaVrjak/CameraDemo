@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<h2>QR Code Scanner</h2>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+
+<video id="preview"></video>
+
+
+<hr />
+<input class="btn-danger bottom" type="button" onclick="openQRCodeScanner()" value="Scan QRCode" />
+
+
+
+
+<script type="text/javascript">
+
+    function openQRCodeScanner() {
+        let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+        scanner.addListener('scan', function (content) {
+            debugger
+            window.location.href = '/Home/GetQRCode?qrCode='+content;
+        });
+        Instascan.Camera.getCameras().then(function (cameras) {
+            debugger
+            if (cameras.length > 0) {
+                scanner.start(cameras[0]);
+            } else {
+                console.error('No cameras found.');
+            }
+        }).catch(function (e) {
+            console.error(e);
+        });
+    }
+</script>
